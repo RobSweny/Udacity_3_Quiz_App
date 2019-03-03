@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
@@ -9,54 +8,75 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_gravity="center"
-        >
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/user_name_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_margin="10dp"
+            android:gravity="top|center_horizontal"
             android:textColor="@color/dark_grey_text"
             android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/question_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_margin="10dp"
+            android:gravity="center_horizontal"
             android:textColor="@color/dark_grey_text"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/linear_layout_questions_1_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkbox_answer_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:onClick="onCheckboxClicked"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:textColorHint="@color/user_name_input"
+                android:visibility="gone" />
+
+            <CheckBox
+                android:id="@+id/checkbox_answer_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:onClick="onCheckboxClicked"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:textColorHint="@color/user_name_input"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/answer_one_button"
-                android:background="@drawable/quiz_buttons"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:background="@drawable/quiz_buttons"
                 android:onClick="buttonClicked"
-                android:textColor="@color/white"
-
-                />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/answer_two_button"
-                android:background="@drawable/quiz_buttons"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:background="@drawable/quiz_buttons"
                 android:onClick="buttonClicked"
                 android:textColor="@color/white"
 
@@ -67,14 +87,38 @@
             android:id="@+id/linear_layout_questions_3_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkbox_answer_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:onClick="onCheckboxClicked"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:textColorHint="@color/user_name_input"
+                android:visibility="gone" />
+
+            <CheckBox
+                android:id="@+id/checkbox_answer_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:onClick="onCheckboxClicked"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:textColorHint="@color/user_name_input"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/answer_three_button"
-                android:background="@drawable/quiz_buttons"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/quiz_buttons"
                 android:onClick="buttonClicked"
                 android:textColor="@color/white"
 
@@ -82,15 +126,28 @@
 
             <Button
                 android:id="@+id/answer_four_button"
-                android:background="@drawable/quiz_buttons"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:background="@drawable/quiz_buttons"
                 android:onClick="buttonClicked"
                 android:textColor="@color/white"
-
                 />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/checkbox_proceed_button"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/quiz_buttons"
+            android:onClick="buttonClicked"
+            android:text="Confirm selected"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            />
+
+
     </LinearLayout>
 </ScrollView>

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,14 +15,16 @@ import java.util.ArrayList;
 
 public class Quiz extends AppCompatActivity {
     // Declarations
-    private LinearLayout linear_layout_questions_1_2;
-    private LinearLayout linear_layout_questions_3_4;
     private TextView question_textview;
     private Button answer_one_button;
     private Button answer_two_button;
     private Button answer_three_button;
     private Button answer_four_button;
-
+    private CheckBox checkbox_answer_one;
+    private CheckBox checkbox_answer_two;
+    private CheckBox checkbox_answer_three;
+    private CheckBox checkbox_answer_four;
+    private Button checkbox_proceed_button;
 
     // Strings for holding questions
     private String[] questions;
@@ -34,6 +37,7 @@ public class Quiz extends AppCompatActivity {
     // Variables
     private int current_question_number;
     private Boolean end_of_quiz = false;
+    private int user_checkbox_score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +51,11 @@ public class Quiz extends AppCompatActivity {
         answer_two_button = findViewById(R.id.answer_two_button);
         answer_three_button = findViewById(R.id.answer_three_button);
         answer_four_button = findViewById(R.id.answer_four_button);
-        linear_layout_questions_1_2 = findViewById(R.id.linear_layout_questions_1_2);
-        linear_layout_questions_3_4 = findViewById(R.id.linear_layout_questions_3_4);
+        checkbox_answer_one = findViewById(R.id.checkbox_answer_one);
+        checkbox_answer_two = findViewById(R.id.checkbox_answer_two);
+        checkbox_answer_three = findViewById(R.id.checkbox_answer_three);
+        checkbox_answer_four = findViewById(R.id.checkbox_answer_four);
+        checkbox_proceed_button = findViewById(R.id.checkbox_proceed_button);
 
         // Fill String arrays
         questions = getResources().getStringArray(R.array.questions);
@@ -76,9 +83,16 @@ public class Quiz extends AppCompatActivity {
             user_answers.add(String.valueOf(2));
         } else if (view.getId() == R.id.answer_three_button) {
             user_answers.add(String.valueOf(3));
-        } else {
+        } else if (view.getId() == R.id.answer_four_button) {
             user_answers.add(String.valueOf(4));
-        } // End if
+        } else if (view.getId() == R.id.checkbox_proceed_button) {
+            if (user_checkbox_score == 0) {
+                Toast.makeText(this, "Please select a minimum of 1 checkbox", Toast.LENGTH_SHORT).show();
+            } else {
+                user_answers.add(String.valueOf(user_checkbox_score));
+                Log.i("Checkbox score: ", String.valueOf(user_checkbox_score));
+            } // End if
+        }
 
         // Increment by 1
         current_question_number++;
@@ -89,16 +103,62 @@ public class Quiz extends AppCompatActivity {
         if (current_question_number == questions.length) {
             end_of_quiz = true;
             Toast.makeText(this, "Congrats on finishing the quiz", Toast.LENGTH_SHORT).show();
-        } else if(current_question_number == 3) {
+        } else if (current_question_number == 3) {
             // Hide previous buttons
-            linear_layout_questions_1_2.setVisibility(View.GONE);
-            linear_layout_questions_3_4.setVisibility(View.GONE);
+            answer_one_button.setVisibility(View.GONE);
+            answer_two_button.setVisibility(View.GONE);
+            answer_three_button.setVisibility(View.GONE);
+            answer_four_button.setVisibility(View.GONE);
+
+            // Show Checkbox
+            checkbox_answer_one.setVisibility(View.VISIBLE);
+            checkbox_answer_two.setVisibility(View.VISIBLE);
+            checkbox_answer_three.setVisibility(View.VISIBLE);
+            checkbox_answer_four.setVisibility(View.VISIBLE);
+            checkbox_proceed_button.setVisibility(View.VISIBLE);
 
 
         } else {
             updateQuiz();
         } // End if
     } // End buttonClicked
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch (view.getId()) {
+            case R.id.checkbox_answer_one:
+                if (checked)
+                    user_checkbox_score++;
+                else
+                    user_checkbox_score--;
+                break;
+
+            case R.id.checkbox_answer_two:
+                if (checked)
+                    user_checkbox_score++;
+                else
+                    user_checkbox_score--;
+                break;
+
+            case R.id.checkbox_answer_three:
+                if (checked)
+                    user_checkbox_score++;
+                else
+                    user_checkbox_score--;
+                break;
+
+            case R.id.checkbox_answer_four:
+                if (checked)
+                    user_checkbox_score++;
+                else
+                    user_checkbox_score--;
+                break;
+        }
+    } // End onCheckboxClicked
+
 
     // Method to start quiz
     public void updateQuiz() {
