@@ -4,4 +4,46 @@
     <string name="quiz_app">QUIZ APP</string>
     <string name="insert_name_here">..INSERT NAME HERE..</string>
     <string name="enter_quiz">Enter\nQuiz</string>
+    <string name="welcome_quiz_textview">Welcome %1$s,\nTo my quiz app!</string>
+
+    <string-array name="questions">
+        <item>What is blah blah?</item>
+        <item>What is blah blah?</item>
+        <item>What is blah blah?</item>
+        <item>What is blah blah?</item>
+        <item>What is blah blah?</item>
+    </string-array>
+
+    <string-array name="answers_one">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
+
+    <string-array name="answers_two">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
+
+    <string-array name="answers_three">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
+
+    <string-array name="answers_four">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
+
 </resources>

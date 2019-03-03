@@ -3,14 +3,94 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@color/user_name_background_blue">
 
-    <TextView
-        android:id="@+id/user_name_textview"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textColor="@color/dark_grey_text"
-        android:textSize="20sp"/>
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        >
 
+        <TextView
+            android:id="@+id/user_name_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:textColor="@color/dark_grey_text"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/question_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:textColor="@color/dark_grey_text"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_questions_1_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/answer_one_button"
+                android:background="@drawable/quiz_buttons"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="buttonClicked"
+                android:textColor="@color/white"
+
+                />
+
+            <Button
+                android:id="@+id/answer_two_button"
+                android:background="@drawable/quiz_buttons"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="buttonClicked"
+                android:textColor="@color/white"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_questions_3_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/answer_three_button"
+                android:background="@drawable/quiz_buttons"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="buttonClicked"
+                android:textColor="@color/white"
+
+                />
+
+            <Button
+                android:id="@+id/answer_four_button"
+                android:background="@drawable/quiz_buttons"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="buttonClicked"
+                android:textColor="@color/white"
+
+                />
+
+        </LinearLayout>
+    </LinearLayout>
 </ScrollView>
