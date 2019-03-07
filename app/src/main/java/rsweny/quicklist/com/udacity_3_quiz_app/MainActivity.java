@@ -34,10 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         // dev_mode was introduced to skip the first section of the app
         // set dev_mode to true to skip entering name
-        Boolean dev_mode = true;
-        Toast.makeText(this,"Dev mode: " + dev_mode,Toast.LENGTH_SHORT).show();
+        Boolean dev_mode = false;
 
         if (dev_mode) {
+            Toast.makeText(this,"Dev mode: " + dev_mode,Toast.LENGTH_SHORT).show();
+
             // Proceed to next activity
             user_name = "Developer";
             Intent myIntent = new Intent(MainActivity.this, Quiz.class);
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     // Proceed to next activity
                     Intent myIntent = new Intent(MainActivity.this, Quiz.class);
-                    myIntent.putExtra("user_name", user_name); //Optional parameters
+                    myIntent.putExtra("user_name", user_name.trim()); //Optional parameters
                     MainActivity.this.startActivity(myIntent);
                 } // End if
             } // End onClick

@@ -4,46 +4,14 @@
     <string name="quiz_app">QUIZ APP</string>
     <string name="insert_name_here">..INSERT NAME HERE..</string>
     <string name="enter_quiz">Enter\nQuiz</string>
-    <string name="welcome_quiz_textview">Welcome %1$s,\nTo my quiz app!</string>
+    <string name="welcome_quiz_textview">Welcome %1$s,\nto the movie quiz!\nName the movie quote</string>
 
     <string-array name="questions">
-        <item>What is blah blah?</item>
-        <item>What is blah blah?</item>
-        <item>What is blah blah?</item>
-        <item>What is blah blah?</item>
-        <item>What is blah blah?</item>
-    </string-array>
-
-    <string-array name="answers_one">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
-        <item>D</item>
-        <item>E</item>
-    </string-array>
-
-    <string-array name="answers_two">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
-        <item>D</item>
-        <item>E</item>
-    </string-array>
-
-    <string-array name="answers_three">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
-        <item>D</item>
-        <item>E</item>
-    </string-array>
-
-    <string-array name="answers_four">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
-        <item>D</item>
-        <item>E</item>
+        <item>\"Youre gonna need\na bigger boat\"@Jaws@Titanic@Castaway@Gladiator@</item>
+        <item>\"You had me at hello\"@Casablanca@Jerry Maguire@The Shining@Gone with the wind@</item>
+        <item>\"Theyre here\"@The Ring@The Poltergeist@The Others@The Grudge@</item>
+        <item>\"Show me the money!\"@Oceans Eleven@The Wolf of\nWall Street@Money Heist@Jerry Maguire@</item>
+        <item>\"Im not that bad\nIm just drawn that way\"@Toy Story@Finding Nemo@Who framed\nRoger Rabbit?@Badly Drawn Boy@</item>
     </string-array>
 
 </resources>

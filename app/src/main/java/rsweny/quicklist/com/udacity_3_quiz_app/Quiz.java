@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Quiz extends AppCompatActivity {
     // Declarations
@@ -33,20 +35,20 @@ public class Quiz extends AppCompatActivity {
     private RadioButton radio_button_three;
     private RadioButton radio_button_four;
     private Button radio_button_proceed_button;
+    private LinearLayout checkbox_linear_layout;
+    private Button quiz_app_reset;
 
     // Strings for holding questions
-    private String[] questions;
-    private String[] answers_one;
-    private String[] answers_two;
-    private String[] answers_three;
-    private String[] answers_four;
-    ArrayList<String> user_answers = new ArrayList<>();
+    private String[][] questions;
+    ArrayList<Integer> user_answers = new ArrayList<>();
+    ArrayList correct_answers = new ArrayList<>(Arrays.asList(1, 2, 2, 12, 3));
+
 
     // Variables
     private int current_question_number;
-    private Boolean end_of_quiz = false;
     private int user_checkbox_score;
     private int user_radiobutton_score;
+    private int final_score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class Quiz extends AppCompatActivity {
         setContentView(R.layout.quiz);
 
         // Declarations
-        TextView user_name_textview = findViewById(R.id.user_name_textview);
+        user_name_textview = findViewById(R.id.user_name_textview);
         question_textview = findViewById(R.id.question_textview);
         answer_one_button = findViewById(R.id.answer_one_button);
         answer_two_button = findViewById(R.id.answer_two_button);
@@ -72,13 +74,20 @@ public class Quiz extends AppCompatActivity {
         radio_button_four = findViewById(R.id.radio_button_four);
         radio_button_proceed_button = findViewById(R.id.radio_button_proceed_button);
         user_name_textview = findViewById(R.id.user_name_textview);
+        checkbox_linear_layout = findViewById(R.id.checkbox_linear_layout);
+        quiz_app_reset = findViewById(R.id.quiz_app_reset);
 
-        // Fill String arrays
-        questions = getResources().getStringArray(R.array.questions);
-        answers_one = getResources().getStringArray(R.array.answers_one);
-        answers_two = getResources().getStringArray(R.array.answers_two);
-        answers_three = getResources().getStringArray(R.array.answers_three);
-        answers_four = getResources().getStringArray(R.array.answers_four);
+        questions = new String[][]{{
+                "\"You're gonna need a bigger boat\"", "Jaws", "Titanic", "Castaway", "Gladiator"
+        }, {
+                "\"You had me at hello\"", "Casablanca", "Jerry Maguire", "The Shining", "Gone with the wind"
+        }, {
+                "\"They're here\"", "The Ring", "The Poltergeist", "The Others", "The Grudge"
+        }, {
+                "Select the actors who voices\nin the movie Toy Story", "Tom Hanks", "Tim Allen", "George Clooney", "Robin Williams"
+        }, {
+                "\"I'm not that bad,\nIm just drawn that way\"", "Toy Story", "Finding Nemo", "Who framed\nRoger Rabbit?", "Badly Drawn Boy"
+        }};
 
         // Retrieve username from previous intent and set it as the opening message string
         Intent intent = getIntent();
@@ -93,55 +102,84 @@ public class Quiz extends AppCompatActivity {
     // Listener for button clicks
     public void buttonClicked(View view) {
         if (view.getId() == R.id.answer_one_button) {
-            user_answers.add(String.valueOf(1));
+            user_answers.add(1);
+
+            current_question_number++;
+            updateQuiz();
         } else if (view.getId() == R.id.answer_two_button) {
-            user_answers.add(String.valueOf(2));
+            user_answers.add(2);
+
+            current_question_number++;
+            updateQuiz();
         } else if (view.getId() == R.id.answer_three_button) {
-            user_answers.add(String.valueOf(3));
+            user_answers.add(3);
+
+            current_question_number++;
+            updateQuiz();
         } else if (view.getId() == R.id.answer_four_button) {
-            user_answers.add(String.valueOf(4));
+            user_answers.add(4);
+
+            current_question_number++;
+            updateQuiz();
         } else if (view.getId() == R.id.checkbox_proceed_button) {
             // Check if none of the checkboxes are selected
             if (user_checkbox_score == 0) {
                 Toast.makeText(this, "Please select a minimum of 1 checkbox", Toast.LENGTH_SHORT).show();
             } else {
-                user_answers.add(String.valueOf(user_checkbox_score));
-                Log.i("Checkbox score: ", String.valueOf(user_checkbox_score));
+                user_answers.add(user_checkbox_score);
+                current_question_number++;
 
                 // Hide the checkboxes once the user has completed.
-                checkbox_answer_one.setVisibility(View.GONE);
-                checkbox_answer_two.setVisibility(View.GONE);
-                checkbox_answer_three.setVisibility(View.GONE);
-                checkbox_answer_four.setVisibility(View.GONE);
-                checkbox_proceed_button.setVisibility(View.GONE);
+                checkbox_linear_layout.setVisibility(View.GONE);
 
                 // Show Radio buttons
                 radio_group.setVisibility(View.VISIBLE);
-                radio_button_one.setText(answers_one[current_question_number]);
-                radio_button_two.setText(answers_two[current_question_number]);
-                radio_button_three.setText(answers_three[current_question_number]);
-                radio_button_four.setText(answers_four[current_question_number]);
+                question_textview.setText(questions[current_question_number][0]);
+                radio_button_one.setText(questions[current_question_number][1]);
+                radio_button_two.setText(questions[current_question_number][2]);
+                radio_button_three.setText(questions[current_question_number][3]);
+                radio_button_four.setText(questions[current_question_number][4]);
                 radio_button_proceed_button.setVisibility(View.VISIBLE);
             } // End if
-        }  else if (view.getId() == R.id.radio_button_proceed_button) {
-            if(user_radiobutton_score == 0){
-                Toast.makeText(this, "Please select a minimum of 1 radiobutton", Toast.LENGTH_SHORT).show();
-            } else {
-                user_answers.add(String.valueOf(user_radiobutton_score));
-                radio_group.setVisibility(View.GONE);
-                radio_button_proceed_button.setVisibility(View.GONE);
-            }
+        } else if (view.getId() == R.id.radio_button_proceed_button) {
+            user_answers.add(user_radiobutton_score);
+            current_question_number++;
+
+            radio_group.setVisibility(View.GONE);
+            radio_button_proceed_button.setVisibility(View.GONE);
+        } else if (view.getId() == R.id.quiz_app_reset) {
+            user_answers.clear();
+            user_radiobutton_score = 0;
+            user_checkbox_score = 0;
+            current_question_number = 0;
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
 
-        // Increment by 1
-        current_question_number++;
-
+        // Checking Values
         Log.i("Question Number: ", String.valueOf(current_question_number));
         Log.i("Total Questions: ", String.valueOf(questions.length));
 
         if (current_question_number == questions.length) {
-            end_of_quiz = true;
             Toast.makeText(this, "Congrats on finishing the quiz", Toast.LENGTH_SHORT).show();
+            user_name_textview.setText("Quiz Completed!\n Final Score: ");
+            question_textview.setVisibility(View.GONE);
+            radio_button_proceed_button.setVisibility(View.GONE);
+            radio_group.setVisibility(View.GONE);
+            quiz_app_reset.setVisibility(View.VISIBLE);
+
+            // Compare user answers to correct answers
+            for (int i = 0; i < correct_answers.size(); i++) {
+                if (user_answers.get(i) == correct_answers.get(i)) {
+                    Log.i("User Guess: ", String.valueOf(user_answers.get(i)));
+                    Log.i("Correct Answer: ", String.valueOf(correct_answers.get(i)));
+                    final_score++;
+                }
+
+            }
+
+            question_textview.setText(String.valueOf(final_score));
+            question_textview.setVisibility(View.VISIBLE);
         } else if (current_question_number == 3) {
             // Hide previous buttons
             answer_one_button.setVisibility(View.GONE);
@@ -150,34 +188,36 @@ public class Quiz extends AppCompatActivity {
             answer_four_button.setVisibility(View.GONE);
 
             // Show Checkbox
-            checkbox_answer_one.setVisibility(View.VISIBLE);
-            checkbox_answer_two.setVisibility(View.VISIBLE);
-            checkbox_answer_three.setVisibility(View.VISIBLE);
-            checkbox_answer_four.setVisibility(View.VISIBLE);
-            checkbox_proceed_button.setVisibility(View.VISIBLE);
-            checkbox_answer_one.setText(answers_one[current_question_number]);
-            checkbox_answer_two.setText(answers_two[current_question_number]);
-            checkbox_answer_three.setText(answers_three[current_question_number]);
-            checkbox_answer_four.setText(answers_four[current_question_number]);
+            checkbox_linear_layout.setVisibility(View.VISIBLE);
+
+            question_textview.setText(questions[current_question_number][0]);
+            checkbox_answer_one.setText(questions[current_question_number][1]);
+            checkbox_answer_two.setText(questions[current_question_number][2]);
+            checkbox_answer_three.setText(questions[current_question_number][3]);
+            checkbox_answer_four.setText(questions[current_question_number][4]);
         } else {
             updateQuiz();
         } // End if
     } // End buttonClicked
 
+
     public void onRadioClicked(View view) {
         radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // find which radio button is selected
-                if(checkedId == R.id.radio_button_one) {
-                    user_radiobutton_score = 1;
-                } else if(checkedId == R.id.radio_button_two) {
-                    user_radiobutton_score = 2;
-                } else if(checkedId == R.id.radio_button_three){
-                    user_radiobutton_score = 3;
-                } else if(checkedId == R.id.radio_button_four){
-                    user_radiobutton_score = 4;
-                } // End if
+                switch (checkedId) {
+                    case R.id.radio_button_one:
+                        user_radiobutton_score = 1;
+                        break;
+                    case R.id.radio_button_two:
+                        user_radiobutton_score = 2;
+                        break;
+                    case R.id.radio_button_three:
+                        user_radiobutton_score = 3;
+                        break;
+                    case R.id.radio_button_four:
+                        user_radiobutton_score = 4;
+                        break;
+                } // End Switch
             } // End onCheckedChanged
         });
     } // End onCheckboxClicked
@@ -187,6 +227,8 @@ public class Quiz extends AppCompatActivity {
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked
+        // There is no possible combination that a user can make to get the same score
+        // without hitting the correct combination
         switch (view.getId()) {
             case R.id.checkbox_answer_one:
                 if (checked)
@@ -220,19 +262,11 @@ public class Quiz extends AppCompatActivity {
 
     // Method to start quiz
     public void updateQuiz() {
-        if (end_of_quiz) {
-            // End of quiz
-            // Bring to new activity to show score
-            user_name_textview.setText("Quiz Completed!\n Final Score");
-            question_textview.setVisibility(View.GONE);
-
-
-        } else {
-            question_textview.setText(questions[current_question_number]);
-            answer_one_button.setText(answers_one[current_question_number]);
-            answer_two_button.setText(answers_two[current_question_number]);
-            answer_three_button.setText(answers_three[current_question_number]);
-            answer_four_button.setText(answers_four[current_question_number]);
-        } // End if
+        // Set Text
+        question_textview.setText(questions[current_question_number][0]);
+        answer_one_button.setText(questions[current_question_number][1]);
+        answer_two_button.setText(questions[current_question_number][2]);
+        answer_three_button.setText(questions[current_question_number][3]);
+        answer_four_button.setText(questions[current_question_number][4]);
     } // End startQuiz
 } // End quiz
