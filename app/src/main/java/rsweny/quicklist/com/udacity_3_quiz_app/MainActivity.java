@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Check if the user has entered a name into the editText
                 if (user_name.equals("")) {
-                    Toast.makeText(MainActivity.this, "Please enter a name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "What is your name?", Toast.LENGTH_SHORT).show();
                 } else {
                     // Proceed to next activity
                     Intent myIntent = new Intent(MainActivity.this, Quiz.class);

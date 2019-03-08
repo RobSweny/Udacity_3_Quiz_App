@@ -62,6 +62,35 @@
                 />
         </LinearLayout>
 
+        <!-- Linear layout for the EditText -->
+        <LinearLayout
+            android:id="@+id/EditText_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <EditText
+                android:id="@+id/edittext_question_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:hint="@string/answer_here_hint"/>
+
+            <Button
+                android:id="@+id/edittext_proceed_button"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/quiz_buttons"
+                android:onClick="buttonClicked"
+                android:text="@string/proceed"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
         <!-- Linear layout for checkboxes -->
         <LinearLayout
             android:id="@+id/checkbox_linear_layout"
@@ -125,8 +154,8 @@
             android:id="@+id/radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checkedButton="@+id/radio_button_one"
             android:orientation="vertical"
+            android:showDividers="beginning|middle|end"
             android:visibility="gone">
 
             <RadioButton
@@ -134,28 +163,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:onClick="onRadioClicked" />
+                android:checked="true"/>
 
             <RadioButton
                 android:id="@+id/radio_button_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:onClick="onRadioClicked" />
+                android:checked="false" />
 
             <RadioButton
                 android:id="@+id/radio_button_three"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:onClick="onRadioClicked" />
+                android:checked="false"/>
 
             <RadioButton
                 android:id="@+id/radio_button_four"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:onClick="onRadioClicked" />
+                android:checked="false" />
         </RadioGroup>
 
 
@@ -197,7 +226,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/quiz_buttons"
             android:onClick="buttonClicked"
-            android:text="Confirm selected"
+            android:text="@string/confirm_selected"
             android:textColor="@color/white"
             android:visibility="gone" />
 
@@ -208,7 +237,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/quiz_buttons"
             android:onClick="buttonClicked"
-            android:text="Reset Quiz"
+            android:text="@string/reset_quiz"
             android:textColor="@color/white"
             android:visibility="gone" />
 
